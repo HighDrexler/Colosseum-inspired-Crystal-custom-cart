@@ -4,21 +4,25 @@ This repository hosts the Gen1Recomp custom-cart configuration for the Colosseum
 
 ## Download
 
-Download `colosseum_inspired_overhaul.g1rcart` from this repository and import it through Gen1Recomp's custom-cart importer.
+Download `colosseum_inspired_overhaul.g1rcart` and import it through Gen1Recomp's custom-cart importer.
 
-## Current portability status
+The cart is now fully remotely pinned. On a clean compatible Gen1Recomp install, the launcher can fetch the exact mod archives used by the cart instead of requiring those mods to already exist locally.
 
-The configuration file is uploaded exactly as exported, including its complete load order, enabled/disabled state, and mod options.
+## Pinned stack
 
-At the moment, however, the cart is **not yet portable to a clean Gen1Recomp install** because every mod entry is still pinned as `source = "local"`. In Gen1Recomp, local pins refer to mods already installed on the machine that created the cart; they do not download missing mods for another user.
+The sealed cart installs and locks the following builds in this load order:
 
-For a true one-click import, each mod must be converted to a published `github` or `gamebanana` pin with the exact public version and archive hash expected by Gen1Recomp.
+1. Colosseum Battle Environments `1.2.0`
+2. Stadium 2 Overworld Models custom fork `0.2.88`
+3. Colosseum Inspired UI Overhaul `2.0.2`
+4. Exp Share `0.1.7`
+5. Wilds of Kanto `2.1.8` — installed/configured but starts OFF
+6. PotatoVoxel `1.9.1`
 
-Two exact builds referenced by this cart are not currently available as matching public releases:
+Every GitHub pin includes the exact release version and SHA-256 archive digest expected by Gen1Recomp. The Stadium2 pin uses `HighDrexler/Gen2-3D-Sprites` release `0.2.88`, which is byte-for-byte identical to the custom Stadium build used when this cart was captured.
 
-- `STADIUM2_OVERWORLD_MODELS` is pinned to `0.2.88`; the public `randyadr/Gen2-3D-Sprites` releases currently expose `0.2.81` as the newest matching release found during setup.
-- `colosseum_ui_overhaul` is pinned to `2.0.2`; the public `HighDrexler/Colosseum-Inspired-UI-Overhaul-V.1.0.0` releases currently expose `2.0.0` as the newest matching release found during setup.
+The exported mod options, enabled/disabled state, and load order are preserved by the cart rather than relying on the user's existing mod configuration.
 
-The Colosseum Battle Environments cart entry also needs to be normalized from `1.2` to semantic version `1.2.0` when it is converted to a GitHub pin; the public release is tagged `1.2.0`.
+## ROM assets
 
-Do not advertise this cart as a clean-install/full-package import until all local pins have been replaced by fetchable published pins. Downgrading the cart to older public builds would change the intended configuration and is intentionally not being done here.
+The cart does not distribute copyrighted game ROMs. The user still needs a legally dumped compatible Pokémon Crystal base ROM for Gen1Recomp, and Colosseum Battle Environments may request the user's legally dumped Pokémon Colosseum ISO/CISO for its extracted assets.
