@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - .github/workflows/publish-stadium2-0.2.88.yml
+      - stadium2/overlay/0.2.88/**
   workflow_dispatch:
 
 permissions:
