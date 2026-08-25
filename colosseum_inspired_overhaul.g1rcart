@@ -81,9 +81,9 @@ return {
           uiThemeColor = "slate",
         },
         repo = "HighDrexler/Colosseum-Inspired-UI-Overhaul-V.1.0.0",
-        sha256 = "9ab6b3fe03306dd70ad0b6673f7b7850fe3f0d732496fbab23c459a6c458347e",
+        sha256 = "e5a44a43b589f058ebda0787869e1f41e9e5ceb4a8ff956cd8e3421f161f0480",
         source = "github",
-        version = "2.0.2",
+        version = "2.0.3",
       },
       [4] = {
         id = "exp_share",
@@ -118,6 +118,7 @@ return {
         id = "potato_voxel",
         options = {
           aa = 4,
+          curve = 2,
           shadowQuality = 1024,
           water = "full",
           weather = true,
@@ -132,7 +133,7 @@ return {
     seal = "sealed",
     shell = "#00ff8c",
     title = "Colosseum inspired overhaul",
-    version = "1.0.0",
+    version = "1.0.1",
   },
   format = "g1rcart",
   formatVersion = 1,
