@@ -1,0 +1,62 @@
+name: Publish Stadium2 custom v0.2.88
+
+on:
+  push:
+    paths:
+      - .github/workflows/publish-stadium2-0.2.88.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rebuild exact Stadium2 0.2.88 fork
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git clone https://github.com/randyadr/Gen2-3D-Sprites.git work
+          git -C work checkout 91b61a109b0b2ab97644e05c518653667fb9518b
+
+          rm -f \
+            work/lib/GoldComposeBridge.lua \
+            work/lib/GoldPipelineBridge.lua \
+            work/lib/GoldVoxelBridge.lua \
+            work/lib/OpenWorldZoom.lua
+
+          cat stadium2/overlay/0.2.88/part-* | base64 -d > overlay.tar.xz
+          tar -xJf overlay.tar.xz -C work
+
+          python3 - <<'PY'
+          import json
+          with open("work/manifest.json", encoding="utf-8") as f:
+              manifest = json.load(f)
+          assert manifest["id"] == "STADIUM2_OVERWORLD_MODELS", manifest
+          assert manifest["version"] == "0.2.88", manifest
+          PY
+
+          rm -rf work/.git
+          (cd work && zip -qr ../STADIUM2_OVERWORLD_MODELS-0.2.88.zip .)
+          sha256sum STADIUM2_OVERWORLD_MODELS-0.2.88.zip > sha256sums.txt
+
+      - name: Publish v0.2.88
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! gh release view v0.2.88 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create v0.2.88 \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "Stadium2 Overworld Models custom v0.2.88" \
+              --notes "Exact custom Stadium2 0.2.88 build used by the Colosseum-inspired Crystal cart, reconstructed from upstream v0.2.81 plus the retained custom overlay."
+          fi
+
+          gh release upload v0.2.88 \
+            STADIUM2_OVERWORLD_MODELS-0.2.88.zip sha256sums.txt \
+            --repo "$GITHUB_REPOSITORY" --clobber
