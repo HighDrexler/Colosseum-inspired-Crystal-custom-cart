@@ -1,6 +1,6 @@
 return {
   cart = {
-    author = "Unknown",
+    author = "HighDrexler",
     base = "crystal",
     id = "colosseum_inspired_overhaul",
     load_order = {
@@ -14,8 +14,10 @@ return {
     mods = {
       [1] = {
         id = "COLOSSEUM_BATTLE_ENVIRONMENTS",
-        source = "local",
-        version = "1.2",
+        repo = "HighDrexler/Colosseum-Battle-Environments-1.0-BETA",
+        sha256 = "d81416d45e91d1bc77c3d660be87f80064d12963bf0495e627087e547a7641d6",
+        source = "github",
+        version = "1.2.0",
       },
       [2] = {
         id = "STADIUM2_OVERWORLD_MODELS",
@@ -46,7 +48,9 @@ return {
           water_spawns = "swimming_sprites",
           worldZoomRange = "world",
         },
-        source = "local",
+        repo = "HighDrexler/Gen2-3D-Sprites",
+        sha256 = "f981078be6f80f44793e3232b1c8db3fa071fb83a0e1b5c71d34390eb9ba5d69",
+        source = "github",
         version = "0.2.88",
       },
       [3] = {
@@ -76,12 +80,16 @@ return {
           uiTextWeight = "normal",
           uiThemeColor = "slate",
         },
-        source = "local",
+        repo = "HighDrexler/Colosseum-Inspired-UI-Overhaul-V.1.0.0",
+        sha256 = "9ab6b3fe03306dd70ad0b6673f7b7850fe3f0d732496fbab23c459a6c458347e",
+        source = "github",
         version = "2.0.2",
       },
       [4] = {
         id = "exp_share",
-        source = "local",
+        repo = "ShaneMcGovernIE/exp_share",
+        sha256 = "a4348ea709ac46cc27399cad3d4c1800133b7d1af2b80e04dcfe5ab10131bb97",
+        source = "github",
         version = "0.1.7",
       },
       [5] = {
@@ -101,7 +109,9 @@ return {
           trainer_trail = true,
           water_spawns = "swimming_sprites",
         },
-        source = "local",
+        repo = "YoDrehDenSwagAuf/overworld-spawn-mod",
+        sha256 = "6147401e42fa9dcc32e6cb47fd0143c6b6930af9e19a3d61976ec819ed395723",
+        source = "github",
         version = "2.1.8",
       },
       [6] = {
@@ -112,10 +122,13 @@ return {
           water = "full",
           weather = true,
         },
-        source = "local",
+        repo = "ShaneMcGovernIE/potato_voxel",
+        sha256 = "3b9e113f93bbefa38177372a66f9614427eb4afaac2025a7e5095df5df98fa86",
+        source = "github",
         version = "1.9.1",
       },
     },
+    repo = "HighDrexler/Colosseum-inspired-Crystal-custom-cart",
     seal = "sealed",
     shell = "#00ff8c",
     title = "Colosseum inspired overhaul",
