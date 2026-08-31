@@ -1,0 +1,45 @@
+name: Publish Colosseum Inspired Overhaul V2 cart
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.publish-v2-cart-release'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify cart package
+        shell: bash
+        run: |
+          set -euo pipefail
+          CART='colosseum_inspired_overhaul_v2-1.0.0.g1rcart'
+          test -s "$CART"
+          grep -q 'id = "colosseum_inspired_overhaul_v2"' "$CART"
+          grep -q 'base = "crystal"' "$CART"
+          grep -q 'version = "1.0.0"' "$CART"
+          sha256sum "$CART" > sha256sums.txt
+
+      - name: Create or refresh V2 cart release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: v1.0.0
+          CART: colosseum_inspired_overhaul_v2-1.0.0.g1rcart
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$CART" sha256sums.txt --clobber
+          else
+            gh release create "$TAG" "$CART" sha256sums.txt \
+              --target main \
+              --title 'Colosseum Inspired Overhaul V2 cart 1.0.0' \
+              --notes 'Current Pokémon Crystal custom-cart configuration. CBE 1.6.1, Colosseum UI 2.2.1, and Exp Share 0.1.7 are exact GitHub pins the launcher can install and verify. BATTLE_ART_VOXEL_GEN2 2.0.1 remains an exact local prerequisite until that build has a public resolver-compatible release.'
+          fi
