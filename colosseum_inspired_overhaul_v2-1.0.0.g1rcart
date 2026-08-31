@@ -25,7 +25,9 @@ return {
           water = "full",
           worldFill = "off",
         },
-        source = "local",
+        repo = "absol89/Gen2Recomped-DramaticShapes",
+        sha256 = "fe3292fb4f8f29e105f397e353d3c32611c23af2123a4146632c524ea9fdc0d8",
+        source = "github",
         version = "2.0.1",
       },
       [2] = {
